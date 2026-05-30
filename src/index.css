@@ -1,0 +1,110 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-obsidian: #090d10;
+  --color-slate-card: #141b22;
+  --color-border-slate: #1e293b;
+  --color-emerald-accent: #10b981;
+  --color-emerald-dim: #059669;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-obsidian font-sans text-slate-300 antialiased;
+    margin: 0;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, #10b981 35%, transparent);
+    color: #f8fafc;
+  }
+}
+
+@layer utilities {
+  .marquee-mask {
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 12%,
+      black 88%,
+      transparent 100%
+    );
+  }
+
+  .project-card-glow {
+    box-shadow: 0 0 0 0 color-mix(in srgb, #10b981 0%, transparent);
+    transition:
+      border-color 0.35s ease,
+      box-shadow 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  .project-card-glow:hover {
+    border-color: #10b981;
+    box-shadow: 0 0 32px color-mix(in srgb, #10b981 18%, transparent);
+    transform: translateY(-2px);
+  }
+
+  .profile-frame {
+    border: 1px solid var(--color-border-slate);
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .profile-frame:hover {
+    border-color: #10b981;
+    box-shadow:
+      0 0 0 1px #10b981,
+      0 0 28px color-mix(in srgb, #10b981 35%, transparent);
+  }
+}
+
+@keyframes marquee-ltr {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track-ltr {
+  animation: marquee-ltr 45s linear infinite;
+}
+
+.marquee-track-rtl {
+  animation: marquee-rtl 50s linear infinite;
+}
+
+@media (max-width: 767px) {
+  .marquee-track-ltr {
+    animation-duration: 58s;
+  }
+
+  .marquee-track-rtl {
+    animation-duration: 64s;
+  }
+}
