@@ -1,17 +1,6 @@
-export const techRowOne = [
-  'React',
-  'Tailwind CSS',
-  'JavaScript (ES Modules)',
-  'HTML5',
-  'CSS3',
-];
+import { siteConfig } from './siteConfig.js';
 
-export const techRowTwo = [
-  'Node.js',
-  'Express',
-  'MySQL',
-  'Prisma',
-  'Git',
-  'GitHub',
-  'MongoDB',
-];
+const midpoint = Math.ceil(siteConfig.skills.length / 2);
+
+export const techRowOne = siteConfig.skills.slice(0, midpoint);
+export const techRowTwo = siteConfig.skills.slice(midpoint);
