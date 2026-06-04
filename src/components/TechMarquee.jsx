@@ -1,12 +1,10 @@
 import { techRowOne, techRowTwo } from '../data/techStack.js';
+import SkillIcon from './SkillIcon.jsx';
 
 function TechBadge({ label }) {
   return (
-    <span className="mx-2 inline-flex shrink-0 items-center rounded-md border border-border-slate bg-slate-card px-4 py-2 font-mono text-xs font-medium text-slate-200 sm:text-sm">
-      <span
-        className="mr-2 h-1.5 w-1.5 rounded-full bg-emerald-accent"
-        aria-hidden="true"
-      />
+    <span className="mx-3 inline-flex shrink-0 items-center gap-3 rounded-full border border-border bg-bg-card px-5 py-2.5 text-sm font-medium text-white/90">
+      <SkillIcon skill={label} />
       {label}
     </span>
   );
@@ -23,11 +21,10 @@ function MarqueeSequence({ items, idPrefix }) {
 }
 
 function MarqueeRow({ items, direction = 'ltr' }) {
-  const trackClass =
-    direction === 'ltr' ? 'marquee-track-ltr' : 'marquee-track-rtl';
+  const trackClass = direction === 'ltr' ? 'marquee-track-ltr' : 'marquee-track-rtl';
 
   return (
-    <div className="marquee-mask relative w-full overflow-hidden py-2">
+    <div className="marquee-mask relative w-full overflow-hidden py-3">
       <div className={`flex w-max ${trackClass}`}>
         <MarqueeSequence items={items} idPrefix={`${direction}-a`} />
         <MarqueeSequence items={items} idPrefix={`${direction}-b`} />
@@ -38,7 +35,7 @@ function MarqueeRow({ items, direction = 'ltr' }) {
 
 export default function TechMarquee() {
   return (
-    <div className="w-full space-y-1" aria-label="Technical skills">
+    <div className="w-full space-y-2" aria-label="Technical skills">
       <MarqueeRow items={techRowOne} direction="ltr" />
       <MarqueeRow items={techRowTwo} direction="rtl" />
     </div>

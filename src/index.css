@@ -1,13 +1,15 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-obsidian: #090d10;
-  --color-slate-card: #141b22;
-  --color-border-slate: #1e293b;
-  --color-emerald-accent: #10b981;
-  --color-emerald-dim: #059669;
+  --color-bg: #0a0a0a;
+  --color-bg-secondary: #141414;
+  --color-bg-card: #1a1a1a;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-muted: rgba(255, 255, 255, 0.06);
+  --color-primary: #3b29ff;
+  --color-primary-dim: #6b5dff;
+  --color-muted: #a3a3a3;
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
 @layer base {
@@ -16,60 +18,91 @@
   }
 
   body {
-    @apply bg-obsidian font-sans text-slate-300 antialiased;
+    @apply bg-bg font-sans text-white antialiased;
     margin: 0;
   }
 
   ::selection {
-    background-color: color-mix(in srgb, #10b981 35%, transparent);
-    color: #f8fafc;
+    background-color: color-mix(in srgb, var(--color-primary) 35%, transparent);
+    color: #fff;
   }
 }
 
 @layer utilities {
+  .section-pad {
+    @apply px-4 py-20 sm:px-6 lg:px-8 lg:py-28;
+  }
+
+  .section-label {
+    @apply text-sm font-medium text-primary;
+  }
+
+  .section-title {
+    @apply mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl;
+  }
+
+  .section-subtitle {
+    @apply mt-4 max-w-xl text-base leading-relaxed text-muted;
+  }
+
   .marquee-mask {
     mask-image: linear-gradient(
       to right,
       transparent 0%,
-      black 12%,
-      black 88%,
+      black 10%,
+      black 90%,
       transparent 100%
     );
     -webkit-mask-image: linear-gradient(
       to right,
       transparent 0%,
-      black 12%,
-      black 88%,
+      black 10%,
+      black 90%,
       transparent 100%
     );
   }
 
-  .project-card-glow {
-    box-shadow: 0 0 0 0 color-mix(in srgb, #10b981 0%, transparent);
-    transition:
-      border-color 0.35s ease,
-      box-shadow 0.35s ease,
-      transform 0.35s ease;
+  .project-card {
+    @apply relative overflow-hidden rounded-2xl border border-border bg-bg-card transition duration-300;
   }
 
-  .project-card-glow:hover {
-    border-color: #10b981;
-    box-shadow: 0 0 32px color-mix(in srgb, #10b981 18%, transparent);
-    transform: translateY(-2px);
+  .project-card:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -20px color-mix(in srgb, var(--color-primary) 25%, transparent);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:opacity-90;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5;
+  }
+
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .profile-frame {
-    border: 1px solid var(--color-border-slate);
+    border: 1px solid var(--color-border);
     transition:
       border-color 0.4s ease,
       box-shadow 0.4s ease;
   }
 
   .profile-frame:hover {
-    border-color: #10b981;
+    border-color: var(--color-primary);
     box-shadow:
-      0 0 0 1px #10b981,
-      0 0 28px color-mix(in srgb, #10b981 35%, transparent);
+      0 0 0 1px var(--color-primary),
+      0 0 28px color-mix(in srgb, var(--color-primary) 35%, transparent);
   }
 }
 
@@ -92,19 +125,19 @@
 }
 
 .marquee-track-ltr {
-  animation: marquee-ltr 45s linear infinite;
+  animation: marquee-ltr 40s linear infinite;
 }
 
 .marquee-track-rtl {
-  animation: marquee-rtl 50s linear infinite;
+  animation: marquee-rtl 44s linear infinite;
 }
 
 @media (max-width: 767px) {
   .marquee-track-ltr {
-    animation-duration: 58s;
+    animation-duration: 50s;
   }
 
   .marquee-track-rtl {
-    animation-duration: 64s;
+    animation-duration: 54s;
   }
 }

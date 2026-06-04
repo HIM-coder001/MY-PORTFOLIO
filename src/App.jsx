@@ -1,48 +1,40 @@
+import { useEffect } from 'react';
+import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
-import About from './components/About.jsx';
 import ProjectShowcase from './components/ProjectShowcase.jsx';
+import Services from './components/Services.jsx';
+import Process from './components/Process.jsx';
+import Skills from './components/Skills.jsx';
 import ContactFooter from './components/ContactFooter.jsx';
 
 export default function App() {
-  return (
-    <div className="min-h-svh bg-obsidian">
-      <header className="sticky top-0 z-50 border-b border-border-slate/60 bg-obsidian/90 backdrop-blur-md">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <a
-            href="#hero"
-            className="font-mono text-sm font-semibold tracking-tight text-white"
-          >
-            <span className="text-emerald-accent">&lt;</span>
-            JM
-            <span className="text-emerald-accent"> /&gt;</span>
-          </a>
-          <div className="flex gap-4 sm:gap-6">
-            <a
-              href="#about"
-              className="text-sm text-slate-400 transition hover:text-emerald-accent"
-            >
-              About
-            </a>
-            <a
-              href="#projects"
-              className="text-sm text-slate-400 transition hover:text-emerald-accent"
-            >
-              Projects
-            </a>
-            <a
-              href="#contact"
-              className="text-sm text-slate-400 transition hover:text-emerald-accent"
-            >
-              Contact
-            </a>
-          </div>
-        </nav>
-      </header>
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
 
-      <main>
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div className="flex min-h-svh flex-col items-center bg-bg text-white">
+      <Navbar />
+
+      <main className="w-full max-w-[1200px] px-5 pt-24">
         <Hero />
-        <About />
         <ProjectShowcase />
+        <Services />
+        <Process />
+        <Skills />
       </main>
 
       <ContactFooter />
