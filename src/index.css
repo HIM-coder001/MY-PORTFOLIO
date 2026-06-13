@@ -76,6 +76,22 @@
     @apply inline-flex items-center justify-center rounded-full bg-primary px-7 py-3 text-sm font-semibold text-white transition hover:opacity-90;
   }
 
+  .schedule-call-pill {
+    @apply inline-flex w-fit cursor-pointer items-center justify-end gap-6 rounded-full border-0 bg-primary py-0.5 pl-[25px] pr-0.5 text-sm font-semibold text-white transition duration-300 hover:-translate-y-1 hover:bg-primary-dim active:translate-y-0;
+  }
+
+  .schedule-call-icon {
+    @apply flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full bg-bg text-white transition duration-300;
+  }
+
+  .schedule-call-pill:hover .schedule-call-icon {
+    @apply rotate-[-45deg];
+  }
+
+  .hero-icon-link {
+    @apply inline-flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-full bg-bg-card text-white transition hover:-translate-y-1 hover:bg-white/10 active:translate-y-0;
+  }
+
   .btn-outline {
     @apply inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5;
   }

@@ -1,5 +1,27 @@
 import { siteConfig } from '../data/siteConfig.js';
 import heroImage from '../assets/hero.jpg';
+import ScheduleCallLink from './ScheduleCallLink.jsx';
+
+function ResumeIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-6 w-6"
+      aria-hidden="true"
+    >
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+      <path d="M10 9H8" />
+      <path d="M16 13H8" />
+      <path d="M16 17H8" />
+    </svg>
+  );
+}
 
 export default function Hero() {
   return (
@@ -42,26 +64,33 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <a href="#contact" className="btn-primary">
-                Get started
-              </a>
+              <ScheduleCallLink />
               <a href="#projects" className="btn-outline">
-                My work
+                View work
+              </a>
+              <a
+                href={siteConfig.resumeUrl}
+                className="hero-icon-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open resume"
+              >
+                <ResumeIcon />
               </a>
             </div>
           </div>
 
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="profile-frame overflow-hidden rounded-3xl">
+            <div className="profile-frame overflow-hidden rounded-full aspect-square">
               <img
                 src={heroImage}
                 alt={`${siteConfig.name} — software engineer`}
-                className="aspect-[4/5] w-full object-cover"
+                className="h-full w-full object-cover"
                 loading="eager"
               />
             </div>
             <div
-              className="pointer-events-none absolute -inset-4 -z-10 rounded-[2rem] bg-primary/20 blur-3xl"
+              className="pointer-events-none absolute inset-0 -z-10 rounded-[2rem] bg-primary/20 blur-3xl"
               aria-hidden="true"
             />
           </div>

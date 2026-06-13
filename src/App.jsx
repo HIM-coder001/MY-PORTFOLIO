@@ -6,6 +6,7 @@ import Services from './components/Services.jsx';
 import Process from './components/Process.jsx';
 import Skills from './components/Skills.jsx';
 import ContactFooter from './components/ContactFooter.jsx';
+import ScheduleButton from './components/ScheduleButton.jsx';
 
 export default function App() {
   useEffect(() => {
@@ -38,6 +39,7 @@ export default function App() {
       </main>
 
       <ContactFooter />
+      <ScheduleButton />
     </div>
   );
 }
