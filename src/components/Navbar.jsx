@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 const navLinks = [
   { id: 'projects', label: 'Projects' },
@@ -6,8 +7,15 @@ const navLinks = [
   { id: 'contact', label: 'Contact' },
 ];
 
-function scrollTo(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+export function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    if (window.lenis) {
+      window.lenis.scrollTo(el, { offset: -80 });
+    } else {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }
 
 function HomeIcon() {
@@ -33,27 +41,38 @@ function HomeIcon() {
 
 export default function Navbar() {
   const [activeId, setActiveId] = useState('hero');
+  const ticking = useRef(false);
 
   useEffect(() => {
-    const sections = ['hero', ...navLinks.map((l) => l.id)];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        if (visible[0]?.target.id) {
-          setActiveId(visible[0].target.id);
+    const sectionIds = ['hero', ...navLinks.map((l) => l.id)];
+
+    function onScroll() {
+      if (ticking.current) return;
+      ticking.current = true;
+
+      requestAnimationFrame(() => {
+        // Find which section's top is closest to (but not past) 30% down the viewport
+        const threshold = window.innerHeight * 0.3;
+        let current = sectionIds[0];
+
+        for (const id of sectionIds) {
+          const el = document.getElementById(id);
+          if (!el) continue;
+          const top = el.getBoundingClientRect().top;
+          if (top <= threshold) {
+            current = id;
+          }
         }
-      },
-      { rootMargin: '-40% 0px -50% 0px', threshold: [0, 0.25, 0.5] }
-    );
 
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+        setActiveId(current);
+        ticking.current = false;
+      });
+    }
 
-    return () => observer.disconnect();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // run once on mount
+
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
@@ -67,16 +86,17 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => scrollTo('hero')}
-            className={`relative flex shrink-0 items-center justify-center whitespace-nowrap px-4 py-3 text-sm transition-colors duration-300 ${
-              activeId === 'hero' ? 'text-gray-900' : 'text-white hover:text-gray-300'
-            }`}
+            className={`relative flex shrink-0 items-center justify-center whitespace-nowrap px-4 py-3 text-sm transition-colors duration-300 ${activeId === 'hero' ? 'text-gray-900' : 'text-white hover:text-gray-300'
+              }`}
             aria-label="Home"
             aria-current={activeId === 'hero' ? 'page' : undefined}
           >
             {activeId === 'hero' && (
-              <span
+              <motion.span
+                layoutId="activeNav"
                 className="absolute inset-0 rounded-full bg-white"
                 style={{ zIndex: -1 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 aria-hidden="true"
               />
             )}
@@ -89,15 +109,16 @@ export default function Navbar() {
                 key={link.id}
                 type="button"
                 onClick={() => scrollTo(link.id)}
-                className={`relative flex shrink-0 items-center justify-center whitespace-nowrap px-4 py-3 text-sm transition-colors duration-300 ${
-                  activeId === link.id ? 'text-gray-900' : 'text-white hover:text-gray-300'
-                }`}
+                className={`relative flex shrink-0 items-center justify-center whitespace-nowrap px-4 py-3 text-sm transition-colors duration-300 ${activeId === link.id ? 'text-gray-900' : 'text-white hover:text-gray-300'
+                  }`}
                 aria-current={activeId === link.id ? 'page' : undefined}
               >
                 {activeId === link.id && (
-                  <span
+                  <motion.span
+                    layoutId="activeNav"
                     className="absolute inset-0 rounded-full bg-white"
                     style={{ zIndex: -1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                     aria-hidden="true"
                   />
                 )}
