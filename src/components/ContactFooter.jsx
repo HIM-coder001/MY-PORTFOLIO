@@ -1,6 +1,13 @@
 import { useState } from 'react';
-import { siteConfig, getGmailComposeUrl } from '../data/siteConfig.js';
+import emailjs from '@emailjs/browser';
+import { siteConfig } from '../data/siteConfig.js';
 import heroImage from '../assets/hero.jpg';
+
+
+const EMAILJS_SERVICE_ID = 'service_t0avuq8';
+const EMAILJS_TEMPLATE_ID = 'template_d4tft7v';
+const EMAILJS_PUBLIC_KEY = 'AxNLKI8gaDZ6bhKyh';
+
 
 function SocialLinkIcon({ icon }) {
   const cls = 'h-5 w-5';
@@ -30,25 +37,115 @@ function SocialLinkIcon({ icon }) {
   }
 }
 
+// Spinner SVG shown during sending
+function Spinner() {
+  return (
+    <svg
+      className="h-4 w-4 animate-spin"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+      />
+    </svg>
+  );
+}
+
+// Checkmark SVG shown after sent
+function CheckIcon() {
+  return (
+    <svg
+      className="h-4 w-4"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={2.5}
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+  );
+}
+
 export default function ContactFooter() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('');
+  // sendStatus: 'idle' | 'sending' | 'sent' | 'error'
+  const [sendStatus, setSendStatus] = useState('idle');
   const year = new Date().getFullYear();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const { name, email, message } = formData;
 
     if (!name || !email || !message) {
-      setStatus('Please fill out all fields before sending.');
+      setSendStatus('error');
       return;
     }
 
-    const subject = `Portfolio inquiry from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-    window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('Opening your mail client...');
+    setSendStatus('sending');
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: name,
+          from_email: email,
+          message: message,
+          to_name: siteConfig.name,
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
+
+      setSendStatus('sent');
+      setFormData({ name: '', email: '', message: '' });
+
+      // Reset button back to idle after 4 seconds
+      setTimeout(() => setSendStatus('idle'), 4000);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setSendStatus('error');
+    }
   };
+
+  // Button label / icon based on status  
+  const buttonContent = () => {
+    switch (sendStatus) {
+      case 'sending':
+        return (
+          <>
+            <Spinner />
+            Sending…
+          </>
+        );
+      case 'sent':
+        return (
+          <>
+            <CheckIcon />
+            Sent!
+          </>
+        );
+      default:
+        return 'Send Message';
+    }
+  };
+
+  const buttonDisabled = sendStatus === 'sending' || sendStatus === 'sent';
+
+  const buttonClass = [
+    'btn-primary w-fit flex items-center gap-2 cursor-pointer transition-all duration-200',
+    sendStatus === 'sent' ? 'bg-green-600 hover:bg-green-600' : '',
+    sendStatus === 'sending' ? 'opacity-75 cursor-not-allowed' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <footer id="contact" className="section-pad border-t border-border-muted">
@@ -80,38 +177,45 @@ export default function ContactFooter() {
                 onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))}
                 className="w-full rounded-2xl border border-border bg-bg-card px-5 py-4 text-sm text-white outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
-              <button type="submit" className="btn-primary w-fit">
-                Send Message
+
+              <button
+                type="submit"
+                disabled={buttonDisabled}
+                className={buttonClass}
+              >
+                {buttonContent()}
               </button>
-              {status && <p className="text-sm text-primary">{status}</p>}
+
+              {sendStatus === 'error' && (
+                <p className="text-sm text-red-400">
+                  {!formData.name || !formData.email || !formData.message
+                    ? 'Please fill out all fields before sending.'
+                    : 'Something went wrong. Please try again or email me directly.'}
+                </p>
+              )}
+
+              {sendStatus === 'sent' && (
+                <p className="text-sm text-green-400">
+                  Message received! I'll get back to you soon.
+                </p>
+              )}
             </form>
 
             <div className="mt-10">
               <p className="text-sm text-muted">Or reach out directly:</p>
               <div className="mt-4 flex flex-wrap gap-3">
-                <a
-                  href={getGmailComposeUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline gap-2"
-                >
-                  <SocialLinkIcon icon="email" />
-                  Email
-                </a>
-                {siteConfig.socialLinks
-                  .filter((l) => l.icon !== 'email')
-                  .map((link) => (
-                    <a
-                      key={link.label}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-outline gap-2"
-                    >
-                      <SocialLinkIcon icon={link.icon} />
-                      {link.label}
-                    </a>
-                  ))}
+                {siteConfig.socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-outline gap-2"
+                  >
+                    <SocialLinkIcon icon={link.icon} />
+                    {link.label}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
