@@ -4,16 +4,16 @@ export const siteConfig = {
   location: 'Eldoret, Kenya',
   availabilityLine1: 'Available for',
   availabilityLine2: 'new projects',
-  heroHeadline: 'Building Scalable Systems.',
-  heroSubtitle: 'Full-Stack & Systems Architecture',
+  heroHeadline: 'Full-stack systems for real business workflows.',
+  heroSubtitle: 'React frontends, stable APIs, and practical data platforms',
   heroDescription:
-    'I build deliberate, production-ready software. I enjoy creating innovative solutions and tackling complex challenges — from relational databases and REST APIs to responsive React frontends.',
+    'I design and build production-ready web systems: dashboards, APIs, databases, and automation that help teams move faster with fewer manual steps.',
   servicesIntro: "Let's bring your ideas to life, together",
   processIntro:
     'Approach that guarantees smooth collaboration and exceptional results.',
   skillsIntro: 'Here are my tech stack skills, which drive better results',
   projectsIntro:
-    'Check out some of my favorite & most recent projects.',
+    'Selected builds that show how I turn messy workflows into usable, maintainable software.',
   contactIntro:
     'Have a project in mind or want to discuss potential opportunities? Feel free to reach out!',
   services: [
@@ -26,7 +26,7 @@ export const siteConfig = {
     {
       title: 'Front-End Development',
       description:
-        'Fast, responsive UI built with React and Tailwind — polished experiences with modern patterns and accessible design.',
+        'Fast, responsive UI built with React and Tailwind, polished experiences with modern patterns and accessible design.',
       icon: 'frontend',
     },
     {
@@ -105,6 +105,14 @@ export const siteConfig = {
   githubUrl: 'https://github.com/HIM-coder001',
   linkedinUrl: 'https://www.linkedin.com/in/joseph-maina-dev',
   email: 'josekamaemaina2005@gmail.com',
+  calUrl: 'https://cal.com/joseph-maina',
+  calLink: 'joseph-maina',
+  calNamespace: 'schedule-call',
+  projectStats: [
+    { value: '7+', label: 'Years building' },
+    { value: '4', label: 'Product areas' },
+    { value: 'Full-stack', label: 'Scope owned' },
+  ],
   socialLinks: [
     { label: 'Email', href: 'mailto:josekamaemaina2005@gmail.com', icon: 'email' },
     { label: 'GitHub', href: 'https://github.com/HIM-coder001', icon: 'github' },
