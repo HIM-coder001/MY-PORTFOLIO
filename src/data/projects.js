@@ -11,7 +11,7 @@ export const projects = [
     stack: ['React', 'Node.js', 'Express', 'MySQL', 'Role-based auth'],
     gradient: 'from-sky-500 via-blue-700 to-slate-950',
     repoUrl: 'https://github.com/HIM-coder001/CBC-BASED-SCHOOL-MANAGEMENT-SYSTEM',
-    liveUrl: null,
+    liveUrl: 'https://example.com',
     isPrivate: false,
     comingSoon: false,
   },
