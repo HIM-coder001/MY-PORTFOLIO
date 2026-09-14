@@ -75,14 +75,16 @@ function CheckIcon() {
 }
 
 export default function ContactFooter() {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '', website: '' });
   // sendStatus: 'idle' | 'sending' | 'sent' | 'error'
   const [sendStatus, setSendStatus] = useState('idle');
   const year = new Date().getFullYear();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { name, email, message } = formData;
+    const { name, email, message, website } = formData;
+
+    if (website) return;
 
     if (!name || !email || !message) {
       setSendStatus('error');
@@ -105,7 +107,7 @@ export default function ContactFooter() {
       );
 
       setSendStatus('sent');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', message: '', website: '' });
 
       // Reset button back to idle after 4 seconds
       setTimeout(() => setSendStatus('idle'), 4000);
@@ -156,26 +158,48 @@ export default function ContactFooter() {
             <p className="section-subtitle">{siteConfig.contactIntro}</p>
 
             <form onSubmit={handleSubmit} className="mt-10 grid gap-4">
+              <label htmlFor="contact-name" className="sr-only">Name</label>
               <input
+                id="contact-name"
                 type="text"
                 placeholder="Name"
+                autoComplete="name"
+                required
                 value={formData.name}
                 onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
                 className="w-full rounded-2xl border border-border bg-bg-card px-5 py-4 text-sm text-white outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
+              <label htmlFor="contact-email" className="sr-only">Email</label>
               <input
+                id="contact-email"
                 type="email"
                 placeholder="Email"
+                autoComplete="email"
+                required
                 value={formData.email}
                 onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
                 className="w-full rounded-2xl border border-border bg-bg-card px-5 py-4 text-sm text-white outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
+              <label htmlFor="contact-message" className="sr-only">Message</label>
               <textarea
+                id="contact-message"
                 rows={5}
                 placeholder="Message"
+                required
                 value={formData.message}
                 onChange={(e) => setFormData((p) => ({ ...p, message: e.target.value }))}
                 className="w-full rounded-2xl border border-border bg-bg-card px-5 py-4 text-sm text-white outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+              />
+              <label htmlFor="contact-website" className="sr-only">Website</label>
+              <input
+                id="contact-website"
+                type="text"
+                tabIndex="-1"
+                autoComplete="off"
+                value={formData.website}
+                onChange={(e) => setFormData((p) => ({ ...p, website: e.target.value }))}
+                className="absolute left-[-9999px] h-px w-px overflow-hidden"
+                aria-hidden="true"
               />
 
               <button
@@ -217,6 +241,12 @@ export default function ContactFooter() {
                   </a>
                 ))}
               </div>
+              <a
+                href={`mailto:${siteConfig.email}?subject=Portfolio%20inquiry`}
+                className="mt-4 inline-flex text-sm text-primary-dim underline-offset-4 hover:underline"
+              >
+                Email me directly
+              </a>
             </div>
           </div>
 

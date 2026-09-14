@@ -2,53 +2,25 @@ import { siteConfig } from '../data/siteConfig.js';
 
 export default function About() {
   return (
-    <section
-      id="about"
-      className="border-t border-border-slate/60 px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24"
-    >
-      <div className="mx-auto max-w-6xl">
-        <header className="mb-10 text-center sm:mb-12 lg:text-left">
-          <p className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-emerald-accent">
-            About
+    <section id="about" className="animate-on-scroll section-pad border-t border-border-muted">
+      <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+        <div>
+          <p className="section-label">About</p>
+          <h2 className="section-title">Building with curiosity and purpose.</h2>
+        </div>
+
+        <div className="space-y-5 text-base leading-relaxed text-white/70 sm:text-lg">
+          <p>{siteConfig.aboutIntro}</p>
+          <p>
+            I am graduating in December 2026 and looking for opportunities to contribute to a thoughtful engineering team, build useful products, and keep growing through real-world work.
           </p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            {siteConfig.name}
-          </h2>
-          <p className="mt-2 font-mono text-sm text-slate-500">{siteConfig.tagline}</p>
-        </header>
-
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-5 lg:gap-12">
-          <div className="space-y-4 lg:col-span-3">
-            {siteConfig.about.map((paragraph, index) => (
-              <p
-                key={index}
-                className="text-sm leading-relaxed text-slate-400 sm:text-base"
-              >
-                {paragraph}
-              </p>
-            ))}
-            <p className="font-mono text-xs text-emerald-accent sm:text-sm">
-              {siteConfig.availability}
-            </p>
-          </div>
-
-          <div className="lg:col-span-2">
-            <h3 className="font-mono text-xs font-medium uppercase tracking-[0.2em] text-slate-500">
-              Focus areas
-            </h3>
-            <ul className="mt-4 space-y-3">
-              {siteConfig.focusAreas.map((area) => (
-                <li
-                  key={area}
-                  className="flex gap-3 text-sm text-slate-300 before:mt-2 before:h-1 before:w-1 before:shrink-0 before:rounded-full before:bg-emerald-accent before:content-['']"
-                >
-                  {area}
-                </li>
-              ))}
-            </ul>
+          <div className="flex flex-wrap gap-3 pt-3">
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">Graduating December 2026</span>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">Full-stack web development</span>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">Open to graduate roles</span>
           </div>
         </div>
       </div>
     </section>
   );
-};
+}
