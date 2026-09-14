@@ -1,17 +1,19 @@
 export const siteConfig = {
   name: 'Joseph Maina',
-  title: 'Software Engineer',
+  title: 'Final-year Software Engineer',
   location: 'Eldoret, Kenya',
   availabilityLine1: 'Available for',
-  availabilityLine2: 'new projects',
-  heroHeadline: 'Full-stack systems for real business workflows.',
-  heroSubtitle: 'React frontends, stable APIs, and practical data platforms',
+  availabilityLine2: 'graduate roles & projects',
+  heroHeadline: 'Full-stack web systems built for real business workflows.',
+  heroSubtitle: 'React frontends, stable APIs, and practical business tools',
   heroDescription:
-    'I design and build production-ready web systems: dashboards, APIs, databases, and automation that help teams move faster with fewer manual steps.',
-  servicesIntro: "Let's bring your ideas to life, together",
+    'I am a final-year software developer building reliable web apps, dashboards, APIs, and internal tools that help teams reduce manual work and move faster.',
+  aboutIntro:
+    'I enjoy turning real problems into clear, maintainable web products. My work focuses on full-stack systems where thoughtful interfaces, dependable APIs, and useful data all need to work together.',
+  servicesIntro: "Let's build something useful, together",
   processIntro:
-    'Approach that guarantees smooth collaboration and exceptional results.',
-  skillsIntro: 'Here are my tech stack skills, which drive better results',
+    'A simple, collaborative workflow that turns ideas into working software.',
+  skillsIntro: 'Here are the tools I use to turn ideas into working software',
   projectsIntro:
     'Selected builds that show how I turn messy workflows into usable, maintainable software.',
   contactIntro:
@@ -28,12 +30,6 @@ export const siteConfig = {
       description:
         'Fast, responsive UI built with React and Tailwind, polished experiences with modern patterns and accessible design.',
       icon: 'frontend',
-    },
-    {
-      title: 'Mobile Development',
-      description:
-        'Cross-platform experiences with React Native and Expo when your product needs to reach users on the go.',
-      icon: 'mobile',
     },
     {
       title: 'Deployment & Maintenance',
@@ -98,8 +94,7 @@ export const siteConfig = {
     'CSS3',
     'Git',
   ],
-  yearsExperience: 7,
-  satisfactionRate: 87,
+  yearsExperience: 0,
   contactFormEndpoint: '',
   resumeUrl: '/resume.pdf',
   githubUrl: 'https://github.com/HIM-coder001',
@@ -109,7 +104,7 @@ export const siteConfig = {
   calLink: 'joseph-maina',
   calNamespace: 'schedule-call',
   projectStats: [
-    { value: '7+', label: 'Years building' },
+    { value: 'Final year', label: 'Graduating Dec 2026' },
     { value: '4', label: 'Product areas' },
     { value: 'Full-stack', label: 'Scope owned' },
   ],

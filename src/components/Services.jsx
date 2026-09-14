@@ -19,12 +19,6 @@ function ServiceIcon({ type }) {
           <path d="M4 9h16" />
         </svg>
       );
-    case 'mobile':
-      return (
-        <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" className={cls}>
-          <rect x="8" y="3" width="8" height="18" rx="2" />
-        </svg>
-      );
     case 'deployment':
       return (
         <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.8" className={cls}>

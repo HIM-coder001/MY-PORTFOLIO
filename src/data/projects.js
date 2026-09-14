@@ -3,6 +3,7 @@ export const projects = [
     id: 'school-management-system',
     title: 'Enterprise School Management',
     category: 'Education platform',
+    type: 'Academic build',
     description:
       'CBC-based platform for enrollment, grading, attendance, and reporting with role-based portals.',
     outcome:
@@ -11,7 +12,7 @@ export const projects = [
     stack: ['React', 'Node.js', 'Express', 'MySQL', 'Role-based auth'],
     gradient: 'from-sky-500 via-blue-700 to-slate-950',
     repoUrl: 'https://github.com/HIM-coder001/CBC-BASED-SCHOOL-MANAGEMENT-SYSTEM',
-    liveUrl: 'https://example.com',
+    liveUrl: null,
     isPrivate: false,
     comingSoon: false,
   },
@@ -19,6 +20,7 @@ export const projects = [
     id: 'forever-ecommerce',
     title: 'Forever E-commerce',
     category: 'Retail storefront',
+    type: 'Personal build',
     description:
       'Apparel storefront with high-performance filtering, category navigation, and persistent cart sessions.',
     outcome:
@@ -35,6 +37,7 @@ export const projects = [
     id: 'shoppy-ecommerce',
     title: 'Shoppy E-commerce',
     category: 'Commerce system',
+    type: 'Personal build',
     description:
       'Modern retail experience on a modular engine with shared checkout and inventory across brand frontends.',
     outcome:
@@ -51,6 +54,7 @@ export const projects = [
     id: 'imagify',
     title: 'Finance Tracker',
     category: 'Personal finance',
+    type: 'Planned build',
     description: 'Transaction management and spending insights for everyday budgeting.',
     outcome:
       'Turns raw spending activity into a clearer picture of habits, categories, and monthly movement.',
