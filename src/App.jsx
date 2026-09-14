@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
+import About from './components/About.jsx';
 import ProjectShowcase from './components/ProjectShowcase.jsx';
 import Services from './components/Services.jsx';
 import Process from './components/Process.jsx';
@@ -25,6 +26,7 @@ export default function App() {
     });
 
     window.lenis = lenis;
+    window.dispatchEvent(new Event('portfolio:lenis-ready'));
 
     let rafId;
     function raf(time) {
@@ -64,6 +66,7 @@ export default function App() {
 
         <main className="w-full max-w-[1200px] px-5 pt-24">
           <Hero />
+          <About />
           <ProjectShowcase />
           <Services />
           <Process />

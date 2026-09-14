@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
+import { motion, useTransform, useMotionValue } from 'framer-motion';
 import { projects } from '../data/projects.js';
 import { siteConfig } from '../data/siteConfig.js';
 
@@ -43,14 +43,6 @@ function GithubIcon({ className = "h-5 w-5" }) {
 function StackingCard({ project, index, total }) {
   const cardRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start start', 'end start'],
-  });
-
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1 - (total - 1 - index) * 0.04]);
-  const opacity = useTransform(scrollYProgress, [0.8, 1], [1, index === total - 1 ? 1 : 0.6]);
-
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-300, 300], [2, -2]);
@@ -74,12 +66,12 @@ function StackingCard({ project, index, total }) {
       ref={cardRef}
       className="sticky flex items-start justify-center"
       style={{
-        scale,
-        opacity,
         transformOrigin: 'top center',
-        top: `${6 + index * 1.5}rem`,
-        marginBottom: index === total - 1 ? '0' : '8rem',
-        perspective: 1200
+        top: '6rem',
+        marginTop: index === 0 ? '0' : '-5rem',
+        marginBottom: index === total - 1 ? '0' : '7rem',
+        perspective: 1200,
+        zIndex: index + 1,
       }}
     >
       <motion.article 
@@ -104,9 +96,14 @@ function StackingCard({ project, index, total }) {
           <div className="flex w-full flex-col justify-between p-8 md:p-10 lg:p-12 lg:w-1/2">
             <div>
               <div className="mb-6 flex items-center justify-between">
-                <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white">
-                  {project.category}
-                </span>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-full border border-white/10 bg-white/10 px-3 py-1 text-xs font-semibold tracking-wide text-white">
+                    {project.category}
+                  </span>
+                  <span className="rounded-full border border-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/55">
+                    {project.type}
+                  </span>
+                </div>
                 <span className="font-mono text-sm font-medium text-white/40 tabular-nums">
                   {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
                 </span>
@@ -119,6 +116,17 @@ function StackingCard({ project, index, total }) {
               <p className="max-w-xl text-base leading-relaxed text-white/70">
                 {project.description}
               </p>
+
+              <div className="mt-6 grid gap-4 border-t border-white/5 pt-6 sm:grid-cols-2">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-dim">Outcome</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65">{project.outcome}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary-dim">My role</p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/65">{project.role}</p>
+                </div>
+              </div>
 
               {(project.comingSoon || project.isPrivate) && (
                 <div className="mt-4 flex gap-2">
@@ -150,26 +158,30 @@ function StackingCard({ project, index, total }) {
 
               {/* Links */}
               <div className="flex shrink-0 flex-wrap gap-4 border-t border-white/5 pt-8">
-                {!project.comingSoon && (
+                {!project.comingSoon && (project.liveUrl || project.repoUrl) && (
                   <>
-                    <a
-                      href={project.liveUrl || '#'}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-white shadow-[0_0_20px_rgba(59,41,255,0.3)] transition-all duration-300 hover:scale-105 hover:bg-primary-dim"
-                    >
-                      Live Demo
-                      <ArrowIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                    </a>
-                    <a
-                      href={project.repoUrl || '#'}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-6 text-sm font-semibold text-white/90 transition-all duration-300 hover:scale-105 hover:bg-white/10 hover:text-white"
-                    >
-                      <GithubIcon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />
-                      View Code
-                    </a>
+                    {project.liveUrl && (
+                      <a
+                        href={project.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-white shadow-[0_0_20px_rgba(59,41,255,0.3)] transition-all duration-300 hover:scale-105 hover:bg-primary-dim"
+                      >
+                        Live Demo
+                        <ArrowIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </a>
+                    )}
+                    {project.repoUrl && (
+                      <a
+                        href={project.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-6 text-sm font-semibold text-white/90 transition-all duration-300 hover:scale-105 hover:bg-white/10 hover:text-white"
+                      >
+                        <GithubIcon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />
+                        View Code
+                      </a>
+                    )}
                   </>
                 )}
               </div>
@@ -183,7 +195,7 @@ function StackingCard({ project, index, total }) {
 
 export default function ProjectShowcase() {
   return (
-    <section id="projects" className="animate-on-scroll section-pad border-t border-border-muted">
+    <section id="projects" className="animate-on-scroll section-pad mb-[-100vh] border-t border-border-muted">
       <div className="mx-auto max-w-6xl">
 
         <header className="mb-14">
@@ -191,7 +203,7 @@ export default function ProjectShowcase() {
           <p className="section-subtitle whitespace-pre-line">{siteConfig.projectsIntro}</p>
         </header>
 
-        <div className="relative pb-24">
+        <div className="relative pb-[100vh]">
           {projects.map((project, index) => (
             <StackingCard
               key={project.id}

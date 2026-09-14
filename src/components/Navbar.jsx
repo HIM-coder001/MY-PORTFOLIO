@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 
 const navLinks = [
+  { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
   { id: 'services', label: 'Services' },
   { id: 'contact', label: 'Contact' },
@@ -41,38 +42,49 @@ function HomeIcon() {
 
 export default function Navbar() {
   const [activeId, setActiveId] = useState('hero');
-  const ticking = useRef(false);
 
   useEffect(() => {
     const sectionIds = ['hero', ...navLinks.map((l) => l.id)];
 
-    function onScroll() {
-      if (ticking.current) return;
-      ticking.current = true;
+    function updateActiveSection(scrollPosition = window.scrollY) {
+      const threshold = window.innerHeight * 0.3;
+      const currentPosition = scrollPosition + threshold;
+      let current = sectionIds[0];
 
-      requestAnimationFrame(() => {
-        // Find which section's top is closest to (but not past) 30% down the viewport
-        const threshold = window.innerHeight * 0.3;
-        let current = sectionIds[0];
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.offsetTop <= currentPosition) current = id;
+      }
 
-        for (const id of sectionIds) {
-          const el = document.getElementById(id);
-          if (!el) continue;
-          const top = el.getBoundingClientRect().top;
-          if (top <= threshold) {
-            current = id;
-          }
-        }
-
-        setActiveId(current);
-        ticking.current = false;
-      });
+      setActiveId((activeId) => (activeId === current ? activeId : current));
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll(); // run once on mount
+    function subscribeToLenis() {
+      if (window.lenis) {
+        const handleLenisScroll = ({ scroll }) => updateActiveSection(scroll);
+        window.lenis.on('scroll', handleLenisScroll);
+        updateActiveSection(window.lenis.scroll);
+        return () => window.lenis?.off('scroll', handleLenisScroll);
+      }
 
-    return () => window.removeEventListener('scroll', onScroll);
+      window.addEventListener('scroll', updateActiveSection, { passive: true });
+      return () => window.removeEventListener('scroll', updateActiveSection);
+    }
+
+    let unsubscribe = subscribeToLenis();
+    const handleLenisReady = () => {
+      unsubscribe();
+      unsubscribe = subscribeToLenis();
+    };
+
+    window.addEventListener('portfolio:lenis-ready', handleLenisReady);
+    updateActiveSection();
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener('portfolio:lenis-ready', handleLenisReady);
+    };
   }, []);
 
   return (
