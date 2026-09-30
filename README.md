@@ -2,7 +2,7 @@
 
 Personal portfolio site built with React, Vite, and Tailwind CSS v4.
 
-Live at: [josephmaina.dev](https://josephmaina.dev) <!-- update with your actual domain when live -->
+Live at: [josephmaina.dev](https://my-portfolio-delta-brown-80.vercel.app/) <!-- update with your actual domain when live -->
 
 ---
 
