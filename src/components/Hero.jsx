@@ -73,7 +73,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className="section-pad relative flex min-h-[calc(100vh-73px)] items-center overflow-hidden">
+    <section id="hero" className="section-pad relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden py-14 sm:py-20 lg:py-28">
       <div className="relative z-10 mx-auto w-full max-w-7xl">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
           
@@ -136,11 +136,11 @@ export default function Hero() {
             </p>
 
             {/* Action Buttons */}
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <ScheduleCallLink />
+            <div className="mt-8 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+              <ScheduleCallLink className="self-start" />
               <button
                 onClick={() => scrollTo('projects')}
-                className="inline-flex h-[52px] cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10"
+                className="inline-flex h-[52px] w-full cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10 sm:w-auto"
               >
                 View work
               </button>
@@ -158,10 +158,10 @@ export default function Hero() {
           </div>
 
           {/* Right Image Content */}
-          <div className="relative mx-auto w-full max-w-md lg:col-span-5 lg:max-w-none" style={{ perspective: 1000 }}>
+          <div className="relative mx-auto mt-2 w-full max-w-[18rem] lg:col-span-5 lg:mt-0 lg:max-w-none" style={{ perspective: 1000 }}>
             {/* The main image container - modernized bento-style */}
             <motion.div 
-              className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-2xl"
+              className="relative aspect-square overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl sm:aspect-[4/5] sm:rounded-[2.5rem]"
               style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
@@ -176,17 +176,17 @@ export default function Hero() {
               
               {/* Floating tech badge */}
               <div 
-                className="absolute bottom-6 left-6 right-6 flex items-center gap-4 rounded-2xl border border-white/10 bg-black/50 p-4 backdrop-blur-md"
+                className="absolute bottom-3 left-3 right-3 flex items-center gap-3 rounded-xl border border-white/10 bg-black/50 p-3 backdrop-blur-md sm:bottom-6 sm:left-6 sm:right-6 sm:gap-4 sm:rounded-2xl sm:p-4"
                 style={{ transform: "translateZ(30px)" }}
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary">
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary sm:h-12 sm:w-12">
+                  <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-white">Software Engineer</p>
-                  <p className="mb-2 text-xs text-white/60">Building scalable solutions</p>
+                  <p className="text-xs font-semibold text-white sm:text-sm">Software Engineer</p>
+                  <p className="mb-2 text-[11px] text-white/60 sm:text-xs">Building scalable solutions</p>
                   
                   {/* Social links */}
                   <div className="flex items-center gap-3">
