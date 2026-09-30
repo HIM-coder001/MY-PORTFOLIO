@@ -55,28 +55,28 @@ export const siteConfig = {
       step: '01',
       title: 'Discover',
       description:
-        'I analyze your business, understand user needs, and define clear objectives.',
+        'We talk through the problem, who the users are, and what success looks like before writing a single line of code.',
       icon: 'discover',
     },
     {
       step: '02',
-      title: 'Plan & Design',
+      title: 'Plan',
       description:
-        'I architect scalable foundations and plan optimal technical stacks for your goals.',
+        'I map out the data model, pick the right stack, and sketch the key screens so there are no surprises mid-build.',
       icon: 'plan',
     },
     {
       step: '03',
       title: 'Build',
       description:
-        'I engineer high-performance solutions using clean code and modern infrastructure.',
+        'I write clean, tested code in focused sprints and share progress so you can give feedback early.',
       icon: 'build',
     },
     {
       step: '04',
       title: 'Launch',
       description:
-        'I deploy secure systems and provide seamless delivery to get your product live.',
+        'I deploy, run final checks, and stay available after go-live to handle anything that comes up.',
       icon: 'launch',
     },
   ],
