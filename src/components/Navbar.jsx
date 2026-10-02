@@ -88,18 +88,20 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-6 pt-6">
+    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-4 sm:px-6 sm:pt-6">
       <nav
-        className="pointer-events-auto flex h-14 max-w-[calc(100vw-48px)] items-center justify-center rounded-full border border-white/[0.04] px-1.5 py-5 backdrop-blur-[11px]"
+        className="pointer-events-auto flex h-12 w-full max-w-sm items-center justify-center rounded-full border border-white/[0.04] px-1 backdrop-blur-[11px] sm:h-14 sm:w-auto sm:max-w-[calc(100vw-48px)] sm:px-1.5"
         style={{ backgroundColor: 'rgba(28, 28, 28, 0.62)' }}
         aria-label="Main navigation"
       >
-        <div className="flex items-center overflow-x-auto overflow-y-hidden [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="flex w-full items-center justify-between sm:w-auto sm:justify-center">
+          {/* Home button */}
           <button
             type="button"
             onClick={() => scrollTo('hero')}
-            className={`relative flex shrink-0 items-center justify-center whitespace-nowrap px-4 py-3 text-sm transition-colors duration-300 ${activeId === 'hero' ? 'text-gray-900' : 'text-white hover:text-gray-300'
-              }`}
+            className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 transition-colors duration-300 sm:px-4 sm:py-3 ${
+              activeId === 'hero' ? 'text-gray-900' : 'text-white hover:text-gray-300'
+            }`}
             aria-label="Home"
             aria-current={activeId === 'hero' ? 'page' : undefined}
           >
@@ -115,29 +117,29 @@ export default function Navbar() {
             <HomeIcon />
           </button>
 
-          <div className="flex shrink-0 items-center">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                type="button"
-                onClick={() => scrollTo(link.id)}
-                className={`relative flex shrink-0 items-center justify-center whitespace-nowrap px-4 py-3 text-sm transition-colors duration-300 ${activeId === link.id ? 'text-gray-900' : 'text-white hover:text-gray-300'
-                  }`}
-                aria-current={activeId === link.id ? 'page' : undefined}
-              >
-                {activeId === link.id && (
-                  <motion.span
-                    layoutId="activeNav"
-                    className="absolute inset-0 rounded-full bg-white"
-                    style={{ zIndex: -1 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                    aria-hidden="true"
-                  />
-                )}
-                <span className="relative z-10 font-medium">{link.label}</span>
-              </button>
-            ))}
-          </div>
+          {/* Nav links */}
+          {navLinks.map((link) => (
+            <button
+              key={link.id}
+              type="button"
+              onClick={() => scrollTo(link.id)}
+              className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 text-xs font-medium transition-colors duration-300 sm:px-4 sm:py-3 sm:text-sm ${
+                activeId === link.id ? 'text-gray-900' : 'text-white hover:text-gray-300'
+              }`}
+              aria-current={activeId === link.id ? 'page' : undefined}
+            >
+              {activeId === link.id && (
+                <motion.span
+                  layoutId="activeNav"
+                  className="absolute inset-0 rounded-full bg-white"
+                  style={{ zIndex: -1 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  aria-hidden="true"
+                />
+              )}
+              <span className="relative z-10">{link.label}</span>
+            </button>
+          ))}
         </div>
       </nav>
     </header>
