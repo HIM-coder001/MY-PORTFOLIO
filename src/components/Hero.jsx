@@ -73,40 +73,40 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className="section-pad relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden py-14 sm:py-20 lg:py-28">
+    <section id="hero" className="section-pad relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden">
       <div className="relative z-10 mx-auto w-full max-w-7xl">
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
           
           {/* Left Text Content */}
           <div className="flex flex-col items-start lg:col-span-7">
             
             {/* Status Pill */}
-            <div className="mb-8 flex items-center gap-3 rounded-full border border-white/10 bg-white/5 py-2 pl-3 pr-5 backdrop-blur-md">
-              <span className="relative flex h-3 w-3 shrink-0">
+            <div className="mb-6 flex items-center gap-3 rounded-full border border-white/10 bg-white/5 py-2 pl-3 pr-4 backdrop-blur-md sm:mb-8 sm:pr-5">
+              <span className="relative flex h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex h-3 w-3 rounded-full bg-primary"></span>
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary sm:h-3 sm:w-3"></span>
               </span>
-              <span className="text-sm font-medium tracking-wide text-white/80">
+              <span className="text-xs font-medium tracking-wide text-white/80 sm:text-sm">
                 {siteConfig.availabilityLine1}{' '}
                 <strong className="text-white">{siteConfig.availabilityLine2}</strong>
               </span>
             </div>
 
             {/* Name & Title */}
-            <div className="mb-6 flex items-center gap-4">
+            <div className="mb-5 flex items-center gap-3 sm:mb-6 sm:gap-4">
               <img
                 src={heroImage}
                 alt={siteConfig.name}
-                className="h-12 w-12 rounded-full object-cover ring-2 ring-white/10"
+                className="h-10 w-10 rounded-full object-cover ring-2 ring-white/10 sm:h-12 sm:w-12"
               />
               <div>
-                <p className="text-lg font-bold text-white">{siteConfig.name}</p>
-                <p className="text-sm text-muted">{siteConfig.title}</p>
+                <p className="text-base font-bold text-white sm:text-lg">{siteConfig.name}</p>
+                <p className="text-xs text-muted sm:text-sm">{siteConfig.title}</p>
               </div>
             </div>
 
             <motion.h1 
-              className="text-5xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-[4.5rem]"
+              className="text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[4.5rem]"
               initial="hidden"
               animate="visible"
               variants={{
@@ -127,26 +127,26 @@ export default function Hero() {
               ))}
             </motion.h1>
 
-            <p className="mt-5 text-lg font-medium text-white/90 sm:text-xl">
+            <p className="mt-4 text-base font-medium text-white/90 sm:mt-5 sm:text-xl">
               {siteConfig.heroSubtitle}
             </p>
 
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 sm:mt-6 sm:text-lg">
               {siteConfig.heroDescription}
             </p>
 
             {/* Action Buttons */}
-            <div className="mt-8 flex flex-col items-stretch gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
               <ScheduleCallLink className="self-start" />
               <button
                 onClick={() => scrollTo('projects')}
-                className="inline-flex h-[52px] w-full cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10 sm:w-auto"
+                className="inline-flex h-12 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10 sm:h-[52px] sm:px-8"
               >
                 View work
               </button>
               <a
                 href={siteConfig.resumeUrl}
-                className="group flex h-[52px] w-[52px] items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition-all hover:border-white/40 hover:bg-white/10"
+                className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition-all hover:border-white/40 hover:bg-white/10 sm:h-[52px] sm:w-[52px]"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open resume"
@@ -158,8 +158,7 @@ export default function Hero() {
           </div>
 
           {/* Right Image Content */}
-          <div className="relative mx-auto mt-2 w-full max-w-[18rem] lg:col-span-5 lg:mt-0 lg:max-w-none" style={{ perspective: 1000 }}>
-            {/* The main image container - modernized bento-style */}
+          <div className="order-first mx-auto w-full max-w-[14rem] sm:max-w-[18rem] lg:order-none lg:col-span-5 lg:max-w-none" style={{ perspective: 1000 }}>
             <motion.div 
               className="relative aspect-square overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl sm:aspect-[4/5] sm:rounded-[2.5rem]"
               style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
@@ -179,14 +178,14 @@ export default function Hero() {
                 className="absolute bottom-3 left-3 right-3 flex items-center gap-3 rounded-xl border border-white/10 bg-black/50 p-3 backdrop-blur-md sm:bottom-6 sm:left-6 sm:right-6 sm:gap-4 sm:rounded-2xl sm:p-4"
                 style={{ transform: "translateZ(30px)" }}
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary sm:h-12 sm:w-12">
-                  <svg className="h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary sm:h-12 sm:w-12">
+                  <svg className="h-4 w-4 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                   </svg>
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-white sm:text-sm">Software Engineer</p>
-                  <p className="mb-2 text-[11px] text-white/60 sm:text-xs">Building scalable solutions</p>
+                  <p className="mb-1.5 text-[10px] text-white/60 sm:mb-2 sm:text-xs">Building scalable solutions</p>
                   
                   {/* Social links */}
                   <div className="flex items-center gap-3">

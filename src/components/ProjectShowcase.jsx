@@ -73,10 +73,10 @@ function ProjectCard({ project, index, total }) {
             <img
               src={project.imageUrl}
               alt={`${project.title} screenshot`}
-              className="h-full min-h-[260px] w-full object-cover object-top transition-transform duration-700 hover:scale-105"
+              className="h-full min-h-[200px] w-full object-cover object-top transition-transform duration-700 hover:scale-105 sm:min-h-[260px]"
             />
           ) : (
-            <div className="flex h-full min-h-[260px] w-full items-center justify-center bg-white/[0.03]">
+            <div className="flex h-full min-h-[200px] w-full items-center justify-center bg-white/[0.03] sm:min-h-[260px]">
               <span className="text-sm text-white/25">No screenshot yet</span>
             </div>
           )}
@@ -87,7 +87,7 @@ function ProjectCard({ project, index, total }) {
         </div>
 
         {/* Content panel */}
-        <div className="flex w-full flex-col justify-between p-8 md:p-10 lg:p-12">
+        <div className="flex w-full flex-col justify-between p-5 sm:p-8 md:p-10 lg:p-12">
           {/* Top: tags + title + description */}
           <div>
             <div className="mb-5 flex flex-wrap gap-2">
@@ -104,11 +104,11 @@ function ProjectCard({ project, index, total }) {
               )}
             </div>
 
-            <h3 className="text-2xl font-bold leading-tight tracking-tight text-white sm:text-3xl">
+            <h3 className="text-xl font-bold leading-tight tracking-tight text-white sm:text-2xl lg:text-3xl">
               {project.title}
             </h3>
 
-            <p className="mt-3 text-base leading-relaxed text-white/65">
+            <p className="mt-3 text-sm leading-relaxed text-white/65 sm:text-base">
               {project.description}
             </p>
 
@@ -146,13 +146,13 @@ function ProjectCard({ project, index, total }) {
               ))}
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-3 border-t border-white/5 pt-6">
+            <div className="mt-5 flex flex-wrap gap-3 border-t border-white/5 pt-5 sm:mt-6 sm:pt-6">
               {project.liveUrl && (
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-11 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-white shadow-[0_0_20px_rgba(59,41,255,0.25)] transition-all duration-300 hover:scale-105 hover:bg-primary-dim"
+                  className="group flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-white shadow-[0_0_20px_rgba(59,41,255,0.25)] transition-all duration-300 hover:scale-105 hover:bg-primary-dim sm:h-11 sm:px-6"
                 >
                   Live Demo
                   <ArrowIcon className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -163,7 +163,7 @@ function ProjectCard({ project, index, total }) {
                   href={project.repoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-11 items-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-6 text-sm font-semibold text-white/90 transition-all duration-300 hover:scale-105 hover:bg-white/10 hover:text-white"
+                  className="group flex h-10 items-center gap-2 rounded-full border border-white/20 bg-white/[0.03] px-5 text-sm font-semibold text-white/90 transition-all duration-300 hover:scale-105 hover:bg-white/10 hover:text-white sm:h-11 sm:px-6"
                 >
                   <GithubIcon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110" />
                   View Code

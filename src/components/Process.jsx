@@ -37,17 +37,17 @@ export default function Process() {
   return (
     <section className="animate-on-scroll section-pad border-t border-border-muted bg-bg-secondary/40">
       <div className="mx-auto max-w-6xl">
-        <header className="mb-14 text-center">
-          <p className="text-5xl font-bold text-primary sm:text-6xl">4</p>
-          <h2 className="mt-2 text-2xl font-bold text-white sm:text-3xl">Step process</h2>
+        <header className="mb-10 text-center sm:mb-14">
+          <p className="text-4xl font-bold text-primary sm:text-5xl lg:text-6xl">4</p>
+          <h2 className="mt-2 text-xl font-bold text-white sm:text-2xl sm:text-3xl">Step process</h2>
           <p className="section-subtitle mx-auto mt-4">{siteConfig.processIntro}</p>
         </header>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
           {siteConfig.processSteps.map((step) => (
             <article
               key={step.step}
-              className="rounded-2xl border border-border bg-bg-card p-6"
+              className="rounded-2xl border border-border bg-bg-card p-5 sm:p-6"
             >
               <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
                 <StepIcon type={step.icon} />

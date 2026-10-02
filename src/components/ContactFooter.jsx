@@ -152,7 +152,7 @@ export default function ContactFooter() {
   return (
     <footer id="contact" className="section-pad border-t border-border-muted">
       <div className="mx-auto max-w-6xl">
-        <div className="grid gap-14 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
           <div>
             <h2 className="section-title">Get In Touch</h2>
             <p className="section-subtitle">{siteConfig.contactIntro}</p>
@@ -250,7 +250,7 @@ export default function ContactFooter() {
             </div>
           </div>
 
-          <aside className="flex flex-col items-center rounded-2xl border border-border bg-bg-card p-8 text-center lg:sticky lg:top-28 lg:self-start">
+          <aside className="flex flex-col items-center rounded-2xl border border-border bg-bg-card p-6 text-center sm:p-8 lg:sticky lg:top-28 lg:self-start">
             <img
               src={heroImage}
               alt={siteConfig.name}
