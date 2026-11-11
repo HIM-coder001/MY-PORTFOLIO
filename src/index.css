@@ -9,6 +9,9 @@
   --color-primary: #3b29ff;
   --color-primary-dim: #6b5dff;
   --color-muted: #a3a3a3;
+  --color-accent-frontend: #22d3ee;
+  --color-accent-backend: #f5a524;
+  --color-accent-fullstack: #e455c9;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
@@ -134,6 +137,95 @@
       0 0 0 1px var(--color-primary),
       0 0 28px color-mix(in srgb, var(--color-primary) 35%, transparent);
   }
+}
+
+@layer components {
+  .project-grid-card {
+    transition:
+      border-color 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .project-grid-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+    box-shadow: 0 24px 48px -24px color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+
+  .disc-chip {
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold tracking-wide backdrop-blur-md;
+    background: color-mix(in srgb, var(--chip-color) 18%, rgba(0, 0, 0, 0.55));
+    border-color: color-mix(in srgb, var(--chip-color) 45%, transparent);
+    color: var(--chip-color);
+  }
+
+  .disc-frontend { --chip-color: var(--color-accent-frontend); }
+  .disc-backend { --chip-color: var(--color-accent-backend); }
+  .disc-fullstack { --chip-color: var(--color-accent-fullstack); }
+
+  .filter-tab {
+    @apply inline-flex cursor-pointer items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-4 py-2 text-sm font-semibold text-muted transition;
+    --tab-accent: #ffffff;
+  }
+
+  .filter-tab:hover {
+    @apply border-white/25 text-white;
+  }
+
+  .filter-tab .filter-dot {
+    @apply h-2 w-2 rounded-full;
+    background: var(--tab-accent);
+  }
+
+  .filter-tab .filter-count {
+    @apply rounded-full bg-white/10 px-1.5 text-[11px] font-bold text-white/70;
+  }
+
+  .filter-tab.is-active {
+    background: var(--tab-accent);
+    border-color: transparent;
+    color: #0a0a0a;
+  }
+
+  .filter-tab.is-active .filter-dot {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .filter-tab.is-active .filter-count {
+    background: rgba(0, 0, 0, 0.18);
+    color: #0a0a0a;
+  }
+
+  .filter-all { --tab-accent: #ffffff; }
+  .filter-frontend { --tab-accent: var(--color-accent-frontend); }
+  .filter-backend { --tab-accent: var(--color-accent-backend); }
+  .filter-fullstack { --tab-accent: var(--color-accent-fullstack); }
+}
+
+/* Custom scrollbar drawn in the site's palette */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) #0f0f0f;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-primary), var(--color-primary-dim));
+  border-radius: 9999px;
+  border: 2px solid #0f0f0f;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-dim);
 }
 
 @keyframes marquee-ltr {

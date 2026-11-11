@@ -10,7 +10,7 @@ Live at: [josephmaina.dev](https://my-portfolio-delta-brown-80.vercel.app/) <!--
 
 - **Hero** — intro, availability status, resume link, and social links
 - **About** — background, focus areas, and graduation timeline
-- **Projects** — vertical card layout with screenshots, live demo links, stack chips, outcome and role details
+- **Projects** — filterable project grid with screenshots, technology icons, and project links
 - **Services** — accordion listing of what I offer
 - **Process** — 4-step workflow from discovery to launch
 - **Skills** — animated marquee of tools and technologies

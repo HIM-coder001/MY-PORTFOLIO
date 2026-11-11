@@ -1,18 +1,15 @@
 import { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
 import Navbar from './components/Navbar.jsx';
-import Hero from './components/Hero.jsx';
-import About from './components/About.jsx';
-import ProjectShowcase from './components/ProjectShowcase.jsx';
-import Services from './components/Services.jsx';
-import Process from './components/Process.jsx';
-import Skills from './components/Skills.jsx';
-import ContactFooter from './components/ContactFooter.jsx';
 import ScheduleButton from './components/ScheduleButton.jsx';
+import HomePage from './pages/HomePage.jsx';
+import ProjectsPage from './pages/ProjectsPage.jsx';
 
 export default function App() {
+  const location = useLocation();
+
   useEffect(() => {
-    // Initialize Lenis
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -35,7 +32,15 @@ export default function App() {
     }
     rafId = requestAnimationFrame(raf);
 
-    // Initialize reveal on scroll observer
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.lenis = null;
+      lenis.destroy();
+    };
+  }, []);
+
+  // Reveal-on-scroll for whichever route is mounted.
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -48,32 +53,41 @@ export default function App() {
       { threshold: 0.12 }
     );
 
-    document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
-    
-    return () => {
-      observer.disconnect();
-      cancelAnimationFrame(rafId);
-      window.lenis = null;
-      lenis.destroy();
-    };
-  }, []);
+    document
+      .querySelectorAll('.animate-on-scroll:not(.is-visible)')
+      .forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // Scroll management on route change: land below the fixed navbar, or jump to a
+  // requested section when arriving from another route.
+  useEffect(() => {
+    const target = location.state?.scrollTo;
+    const rafId = requestAnimationFrame(() => {
+      if (target) {
+        const el = document.getElementById(target);
+        if (el && window.lenis) window.lenis.scrollTo(el, { offset: -80 });
+        else if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
+    });
+    return () => cancelAnimationFrame(rafId);
+  }, [location.pathname, location.state]);
 
   return (
     <>
       <div className="noise-overlay" aria-hidden="true" />
-      <div className="flex min-h-svh flex-col items-center bg-bg text-white relative z-0">
+      <div className="relative z-0 flex min-h-svh flex-col items-center bg-bg text-white">
         <Navbar />
-
-        <main className="w-full max-w-[1200px] px-5 pt-24">
-          <Hero />
-          <About />
-          <ProjectShowcase />
-          <Services />
-          <Process />
-          <Skills />
-        </main>
-
-        <ContactFooter />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
         <ScheduleButton />
       </div>
     </>
