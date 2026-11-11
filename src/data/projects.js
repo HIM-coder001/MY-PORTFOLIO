@@ -1,5 +1,23 @@
 export const projects = [
   {
+    id: 'portfolio-website',
+    title: 'Portfolio Website',
+    category: 'Personal portfolio',
+    type: 'Frontend build',
+    discipline: 'frontend',
+    description:
+      'A responsive portfolio showcasing my frontend work, services, selected projects, and contact information.',
+    outcome:
+      'Gives visitors a clear overview of my work and an easy way to get in touch.',
+    role: 'Built the responsive portfolio experience, including the project showcase and contact section.',
+    stack: ['React', 'JavaScript', 'CSS3'],
+    gradient: 'from-fuchsia-500 via-violet-700 to-slate-950',
+    imageUrl: '/projects/portfolio-website.png',
+    liveUrl: 'https://portfolio-website-w2h1.vercel.app/',
+    isPrivate: false,
+    comingSoon: false,
+  },
+  {
     id: 'movie-app',
     title: 'Movie Discovery App',
     category: 'Entertainment',
