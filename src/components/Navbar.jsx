@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const navLinks = [
   { id: 'about', label: 'About' },
@@ -42,8 +43,16 @@ function HomeIcon() {
 
 export default function Navbar() {
   const [activeId, setActiveId] = useState('hero');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const onHome = location.pathname === '/';
 
   useEffect(() => {
+    if (!onHome) {
+      setActiveId(location.pathname === '/projects' ? 'projects' : '');
+      return undefined;
+    }
+
     const sectionIds = ['hero', ...navLinks.map((l) => l.id)];
 
     function updateActiveSection(scrollPosition = window.scrollY) {
@@ -57,7 +66,7 @@ export default function Navbar() {
         if (el.offsetTop <= currentPosition) current = id;
       }
 
-      setActiveId((activeId) => (activeId === current ? activeId : current));
+      setActiveId((prev) => (prev === current ? prev : current));
     }
 
     function subscribeToLenis() {
@@ -68,8 +77,9 @@ export default function Navbar() {
         return () => window.lenis?.off('scroll', handleLenisScroll);
       }
 
-      window.addEventListener('scroll', updateActiveSection, { passive: true });
-      return () => window.removeEventListener('scroll', updateActiveSection);
+      const handleScroll = () => updateActiveSection();
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => window.removeEventListener('scroll', handleScroll);
     }
 
     let unsubscribe = subscribeToLenis();
@@ -85,7 +95,22 @@ export default function Navbar() {
       unsubscribe();
       window.removeEventListener('portfolio:lenis-ready', handleLenisReady);
     };
-  }, []);
+  }, [onHome, location.pathname]);
+
+  function goHome() {
+    if (onHome) scrollTo('hero');
+    else navigate('/', { state: { scrollTo: 'hero' } });
+  }
+
+  function goToSection(id) {
+    if (onHome) scrollTo(id);
+    else navigate('/', { state: { scrollTo: id } });
+  }
+
+  function handleNavClick(id) {
+    if (id === 'projects') navigate('/projects');
+    else goToSection(id);
+  }
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-4 sm:px-6 sm:pt-6">
@@ -98,7 +123,7 @@ export default function Navbar() {
           {/* Home button */}
           <button
             type="button"
-            onClick={() => scrollTo('hero')}
+            onClick={goHome}
             className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 transition-colors duration-300 max-[359px]:px-1 sm:px-4 sm:py-3 ${
               activeId === 'hero' ? 'text-gray-900' : 'text-white hover:text-gray-300'
             }`}
@@ -122,7 +147,7 @@ export default function Navbar() {
             <button
               key={link.id}
               type="button"
-              onClick={() => scrollTo(link.id)}
+              onClick={() => handleNavClick(link.id)}
               className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 text-xs font-medium transition-colors duration-300 max-[359px]:px-1 sm:px-4 sm:py-3 sm:text-sm ${
                 activeId === link.id ? 'text-gray-900' : 'text-white hover:text-gray-300'
               }`}

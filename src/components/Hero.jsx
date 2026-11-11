@@ -1,8 +1,8 @@
 import { siteConfig } from '../data/siteConfig.js';
 import heroImage from '../assets/hero.jpg';
-import ScheduleCallLink from './ScheduleCallLink.jsx';
+import RotatingRole from './RotatingRole.jsx';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { scrollTo } from './Navbar.jsx';
+import { Link } from 'react-router-dom';
 
 function ResumeIcon() {
   return (
@@ -25,30 +25,27 @@ function ResumeIcon() {
   );
 }
 
-function GithubIcon({ className = "h-5 w-5" }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.15c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4" />
-      <path d="M9 18c-4.51 2-5-2-7-2" />
-    </svg>
-  );
-}
+function SocialIcon({ name }) {
+  if (name === 'github') {
+    return (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
+        <path d="M12 .297a12 12 0 0 0-3.79 23.385c.6.111.82-.261.82-.577v-2.234c-3.338.726-4.043-1.416-4.043-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.3-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.323 3.301 1.23a11.5 11.5 0 0 1 6.007 0c2.292-1.553 3.297-1.23 3.297-1.23.655 1.653.243 2.874.12 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.628-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.216.694.825.576A12.001 12.001 0 0 0 12 .297" />
+      </svg>
+    );
+  }
 
-function LinkedinIcon({ className = "h-5 w-5" }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect width="4" height="12" x="2" y="9" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
+  if (name === 'linkedin') {
+    return (
+      <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.85-3.037-1.852 0-2.135 1.445-2.135 2.939v5.667H9.354V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124m1.782 13.019H3.555V9h3.564zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0z" />
+      </svg>
+    );
+  }
 
-function EmailIcon({ className = "h-5 w-5" }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <rect width="20" height="16" x="2" y="4" rx="2" />
-      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5" aria-hidden="true">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2" />
+      <path d="m3 6 9 7 9-7" />
     </svg>
   );
 }
@@ -73,143 +70,80 @@ export default function Hero() {
   }
 
   return (
-    <section id="hero" className="section-pad relative flex min-h-[calc(100svh-73px)] items-center overflow-hidden">
-      <div className="relative z-10 mx-auto w-full max-w-7xl">
-        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-8">
-          
-          {/* Left Text Content */}
-          <div className="flex flex-col items-start lg:col-span-7">
-            
-            {/* Status Pill */}
-            <div className="mb-6 flex items-center gap-3 rounded-full border border-white/10 bg-white/5 py-2 pl-3 pr-4 backdrop-blur-md sm:mb-8 sm:pr-5">
-              <span className="relative flex h-2.5 w-2.5 shrink-0 sm:h-3 sm:w-3">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary sm:h-3 sm:w-3"></span>
-              </span>
-              <span className="text-xs font-medium tracking-wide text-white/80 sm:text-sm">
-                {siteConfig.availabilityLine1}{' '}
-                <strong className="text-white">{siteConfig.availabilityLine2}</strong>
-              </span>
-            </div>
+    <section id="hero" className="relative -mt-24 flex min-h-svh items-center justify-center overflow-hidden px-4 pb-10 pt-24 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+        <div className="mb-5 w-32 sm:mb-6 sm:w-40" style={{ perspective: 1000 }}>
+          <motion.div
+            className="relative aspect-square overflow-hidden rounded-full border border-white/10 bg-white/5 shadow-2xl"
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          >
+            <img
+              src={heroImage}
+              alt={`${siteConfig.name} profile`}
+              className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+              loading="eager"
+            />
+          </motion.div>
+        </div>
 
-            {/* Name & Title */}
-            <div className="mb-5 flex items-center gap-3 sm:mb-6 sm:gap-4">
-              <img
-                src={heroImage}
-                alt={siteConfig.name}
-                className="h-10 w-10 rounded-full object-cover ring-2 ring-white/10 sm:h-12 sm:w-12"
-              />
-              <div>
-                <p className="text-base font-bold text-white sm:text-lg">{siteConfig.name}</p>
-                <p className="text-xs text-muted sm:text-sm">{siteConfig.title}</p>
-              </div>
-            </div>
+        <RotatingRole />
 
-            <motion.h1 
-              className="text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[4.5rem]"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                visible: { transition: { staggerChildren: 0.05 } },
-              }}
+        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/75 sm:mt-5 sm:text-sm">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+            <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-primary" />
+          </span>
+          Open to internships &amp; projects
+        </div>
+
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70 sm:mt-5 sm:text-lg">
+          {siteConfig.heroDescription}
+        </p>
+
+        <div className="mt-6 flex w-full flex-nowrap items-center justify-center gap-2 sm:mt-8 sm:w-auto sm:gap-4">
+          <Link
+            to="/"
+            state={{ scrollTo: 'contact' }}
+            className="inline-flex h-12 cursor-pointer items-center justify-center rounded-full bg-primary px-6 text-sm font-semibold text-white transition-colors hover:bg-primary-dim sm:h-[52px] sm:px-8"
+          >
+            Contact
+          </Link>
+          <Link
+            to="/projects"
+            className="inline-flex h-12 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10 sm:h-[52px] sm:px-8"
+          >
+            View work
+          </Link>
+          <a
+            href={siteConfig.resumeUrl}
+            className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition-all hover:border-white/40 hover:bg-white/10 sm:h-[52px] sm:w-[52px]"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open resume"
+            title="Resume"
+          >
+            <ResumeIcon />
+          </a>
+        </div>
+
+        <div className="mt-6 flex items-center justify-center gap-3" aria-label="Social links">
+          {siteConfig.socialLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith('mailto:') ? undefined : '_blank'}
+              rel={link.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+              aria-label={link.label}
+              title={link.label}
+              data-social={link.icon}
+              className="social-link inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/75 transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              {siteConfig.heroHeadline.split(' ').map((word, i) => (
-                <motion.span
-                  key={i}
-                  className="inline-block mr-[0.25em]"
-                  variants={{
-                    hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9] } },
-                  }}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </motion.h1>
-
-            <p className="mt-4 text-base font-medium text-white/90 sm:mt-5 sm:text-xl">
-              {siteConfig.heroSubtitle}
-            </p>
-
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/70 sm:mt-6 sm:text-lg">
-              {siteConfig.heroDescription}
-            </p>
-
-            {/* Action Buttons */}
-            <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
-              <ScheduleCallLink className="self-start" />
-              <button
-                onClick={() => scrollTo('projects')}
-                className="inline-flex h-12 cursor-pointer items-center justify-center rounded-full border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/10 sm:h-[52px] sm:px-8"
-              >
-                View work
-              </button>
-              <a
-                href={siteConfig.resumeUrl}
-                className="group flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition-all hover:border-white/40 hover:bg-white/10 sm:h-[52px] sm:w-[52px]"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open resume"
-                title="Resume"
-              >
-                <ResumeIcon />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Image Content */}
-          <div className="order-first mx-auto w-full max-w-[14rem] sm:max-w-[18rem] lg:order-none lg:col-span-5 lg:max-w-none" style={{ perspective: 1000 }}>
-            <motion.div 
-              className="relative aspect-square overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl sm:aspect-[4/5] sm:rounded-[2.5rem]"
-              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            >
-              <img
-                src={heroImage}
-                alt={`${siteConfig.name} profile`}
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                loading="eager"
-              />
-              
-              {/* Floating tech badge */}
-              <div 
-                className="absolute bottom-3 left-3 right-3 flex items-center gap-3 rounded-xl border border-white/10 bg-black/50 p-3 backdrop-blur-md sm:bottom-6 sm:left-6 sm:right-6 sm:gap-4 sm:rounded-2xl sm:p-4"
-                style={{ transform: "translateZ(30px)" }}
-              >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/20 text-primary sm:h-12 sm:w-12">
-                  <svg className="h-4 w-4 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                  </svg>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold text-white sm:text-sm">Software Engineer</p>
-                  <p className="mb-1.5 text-[10px] text-white/60 sm:mb-2 sm:text-xs">Building scalable solutions</p>
-                  
-                  {/* Social links */}
-                  <div className="flex items-center gap-3">
-                    {siteConfig.socialLinks.map((link) => (
-                      <a
-                        key={link.label}
-                        href={link.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="social-link text-white/60 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                        aria-label={link.label}
-                        data-social={link.icon}
-                      >
-                        {link.icon === 'github' && <GithubIcon className="h-4 w-4" />}
-                        {link.icon === 'linkedin' && <LinkedinIcon className="h-4 w-4" />}
-                        {link.icon === 'email' && <EmailIcon className="h-4 w-4" />}
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
+              <SocialIcon name={link.icon} />
+            </a>
+          ))}
         </div>
       </div>
     </section>

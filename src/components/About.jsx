@@ -11,13 +11,10 @@ export default function About() {
 
         <div className="space-y-5 text-base leading-relaxed text-white/70 sm:text-lg">
           <p>{siteConfig.aboutIntro}</p>
-          <p>
-            I am graduating in December 2026 and looking for opportunities to contribute to a thoughtful engineering team, build useful products, and keep growing through real-world work.
-          </p>
           <div className="flex flex-wrap gap-3 pt-3">
-            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">Graduating December 2026</span>
-            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">Full-stack web development</span>
-            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">Open to graduate roles</span>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">React &amp; Node.js</span>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">API integrations</span>
+            <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/80">Responsive user experiences</span>
           </div>
         </div>
       </div>
