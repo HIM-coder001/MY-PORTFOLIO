@@ -10,9 +10,10 @@ export const projects = [
     outcome:
       'Gives visitors a clear overview of my work and an easy way to get in touch.',
     role: 'Built the responsive portfolio experience, including the project showcase and contact section.',
-    stack: ['React', 'JavaScript', 'CSS3'],
+    stack: ['React', 'CSS3'],
     gradient: 'from-fuchsia-500 via-violet-700 to-slate-950',
     imageUrl: '/projects/portfolio-website.png',
+    repoUrl: 'https://github.com/HIM-coder001/Portfolio-website',
     liveUrl: 'https://portfolio-website-w2h1.vercel.app/',
     isPrivate: false,
     comingSoon: false,
