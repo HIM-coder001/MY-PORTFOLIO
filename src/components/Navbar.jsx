@@ -99,7 +99,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => scrollTo('hero')}
-            className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 transition-colors duration-300 sm:px-4 sm:py-3 ${
+            className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 transition-colors duration-300 max-[359px]:px-1 sm:px-4 sm:py-3 ${
               activeId === 'hero' ? 'text-gray-900' : 'text-white hover:text-gray-300'
             }`}
             aria-label="Home"
@@ -123,7 +123,7 @@ export default function Navbar() {
               key={link.id}
               type="button"
               onClick={() => scrollTo(link.id)}
-              className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 text-xs font-medium transition-colors duration-300 sm:px-4 sm:py-3 sm:text-sm ${
+              className={`relative flex shrink-0 items-center justify-center rounded-full px-3 py-2.5 text-xs font-medium transition-colors duration-300 max-[359px]:px-1 sm:px-4 sm:py-3 sm:text-sm ${
                 activeId === link.id ? 'text-gray-900' : 'text-white hover:text-gray-300'
               }`}
               aria-current={activeId === link.id ? 'page' : undefined}

@@ -63,19 +63,19 @@ export default function Services() {
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition hover:bg-white/[0.02] sm:px-8 sm:py-6"
+                  className="flex w-full items-center justify-between gap-2 px-2 py-5 text-left transition hover:bg-white/[0.02] sm:gap-4 sm:px-8 sm:py-6"
                   aria-expanded={isOpen}
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex min-w-0 items-center gap-2 sm:gap-4">
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
                       <ServiceIcon type={service.icon} />
                     </span>
-                    <span className="text-lg font-semibold text-white sm:text-xl">
+                    <span className="min-w-0 break-words text-base font-semibold text-white sm:text-xl">
                       {service.title}
                     </span>
                   </div>
                   <span
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border text-lg font-light transition ${
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-border text-lg font-light transition sm:h-8 sm:w-8 ${
                       isOpen ? 'rotate-45 border-primary text-primary' : 'text-muted'
                     }`}
                     aria-hidden="true"
