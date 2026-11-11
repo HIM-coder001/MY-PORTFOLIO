@@ -96,8 +96,8 @@ export const siteConfig = {
   githubUrl: 'https://github.com/HIM-coder001',
   linkedinUrl: 'https://www.linkedin.com/in/joseph-maina-dev',
   email: 'josekamaemaina2005@gmail.com',
-  calUrl: 'https://cal.com/joseph-maina',
-  calLink: 'joseph-maina',
+  calUrl: 'https://cal.com/him-4j6zcd/30min',
+  calLink: 'him-4j6zcd/30min',
   calNamespace: 'schedule-call',
   socialLinks: [
     { label: 'Email', href: 'mailto:josekamaemaina2005@gmail.com', icon: 'email' },
