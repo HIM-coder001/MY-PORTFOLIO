@@ -92,6 +92,24 @@
     @apply inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white transition hover:border-white/40 hover:bg-white/5;
   }
 
+  .social-link[data-social='linkedin']:is(:hover, :focus-visible) {
+    color: #0a66c2;
+    border-color: color-mix(in srgb, #0a66c2 55%, transparent);
+    background-color: color-mix(in srgb, #0a66c2 12%, transparent);
+  }
+
+  .social-link[data-social='github']:is(:hover, :focus-visible) {
+    color: #f0f6fc;
+    border-color: #30363d;
+    background-color: #181717;
+  }
+
+  .social-link[data-social='email']:is(:hover, :focus-visible) {
+    color: #ea4335;
+    border-color: color-mix(in srgb, #ea4335 55%, transparent);
+    background-color: color-mix(in srgb, #ea4335 12%, transparent);
+  }
+
   .animate-on-scroll {
     opacity: 0;
     transform: translateY(24px);

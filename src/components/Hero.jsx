@@ -195,8 +195,9 @@ export default function Hero() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/60 transition-colors hover:text-white"
+                        className="social-link text-white/60 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                         aria-label={link.label}
+                        data-social={link.icon}
                       >
                         {link.icon === 'github' && <GithubIcon className="h-4 w-4" />}
                         {link.icon === 'linkedin' && <LinkedinIcon className="h-4 w-4" />}

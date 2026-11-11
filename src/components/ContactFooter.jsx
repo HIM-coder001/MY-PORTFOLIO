@@ -234,7 +234,8 @@ export default function ContactFooter() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-outline gap-2"
+                    data-social={link.icon}
+                    className="social-link btn-outline gap-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <SocialLinkIcon icon={link.icon} />
                     {link.label}
