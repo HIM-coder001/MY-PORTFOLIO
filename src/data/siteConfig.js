@@ -1,11 +1,7 @@
 export const siteConfig = {
   name: 'Joseph Maina',
-  title: 'Final-year Software Engineer',
+  title: 'Software Developer',
   location: 'Eldoret, Kenya',
-  availabilityLine1: 'Available for',
-  availabilityLine2: 'graduate roles & projects',
-  heroHeadline: 'Full-stack web systems built for real business workflows.',
-  heroSubtitle: 'React frontends, stable APIs, and practical business tools',
   heroDescription:
     'While my day-to-day focus is deep in backend architectures, databases, and APIs, I build full-stack web applications from the ground up-stitching clean server logic to responsive user interfaces.',
   aboutIntro:
@@ -103,11 +99,6 @@ export const siteConfig = {
   calUrl: 'https://cal.com/joseph-maina',
   calLink: 'joseph-maina',
   calNamespace: 'schedule-call',
-  projectStats: [
-    { value: 'Final year', label: 'Graduating Dec 2026' },
-    { value: '4', label: 'Product areas' },
-    { value: 'Full-stack', label: 'Scope owned' },
-  ],
   socialLinks: [
     { label: 'Email', href: 'mailto:josekamaemaina2005@gmail.com', icon: 'email' },
     { label: 'GitHub', href: 'https://github.com/HIM-coder001', icon: 'github' },
