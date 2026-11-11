@@ -7,9 +7,9 @@ export const siteConfig = {
   heroHeadline: 'Full-stack web systems built for real business workflows.',
   heroSubtitle: 'React frontends, stable APIs, and practical business tools',
   heroDescription:
-    'I am a final-year software developer building reliable web apps, dashboards, APIs, and internal tools that help teams reduce manual work and move faster.',
+    'While my day-to-day focus is deep in backend architectures, databases, and APIs, I build full-stack web applications from the ground up-stitching clean server logic to responsive user interfaces.',
   aboutIntro:
-    'I enjoy turning real problems into clear, maintainable web products. My work focuses on full-stack systems where thoughtful interfaces, dependable APIs, and useful data all need to work together.',
+    'I’m a software engineer who loves figuring out how complex systems fit together under the hood. While I work across the full stack building clean, responsive frontends when a project needs them my real comfort zone is deep in the backend.\n\nWhether I’m designing multi-table relational database schemas, engineering REST APIs, or wiring up third-party payment integrations like M-Pesa, I focus on building software that is predictable, secure, and easy to maintain. I treat backend development like building a solid engine: if the architecture, data models, and error handling are handled correctly, everything on top runs effortlessly.',
   servicesIntro: "Let's build something useful, together",
   processIntro:
     'A simple, collaborative workflow that turns ideas into working software.',
